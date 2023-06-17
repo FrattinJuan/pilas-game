@@ -3,7 +3,7 @@ Game made in pilasengine 1.4.2 using python 2
 
 ## Tutorial: Cómo funciona el código del juego "Rock, Paper, Scissors"
 
-En este tutorial, te explicaré cómo funciona el código del juego "Rock, Paper, Scissors" utilizando la biblioteca pilasengine. Este juego consiste en controlar un personaje llamado "rock" y esquivar los objetos "papel" y "tijera" que caen desde la parte superior de la pantalla.
+En este tutorial, te explicaré cómo funciona el código del juego "Rock, Paper, Scissors" utilizando la biblioteca pilasengine. Este juego consiste en controlar un personaje llamado "rock" (con las flechas del teclado "izquierda" y "derecha") y esquivar los objetos "papel" y "tijera" que caen desde la parte superior de la pantalla.
 
 1. Importar las bibliotecas necesarias:
    El código comienza importando las bibliotecas "random" y "pilasengine". La biblioteca "random" se utiliza para generar valores aleatorios y "pilasengine" es una biblioteca de desarrollo de videojuegos en Python.
@@ -33,9 +33,7 @@ En este tutorial, te explicaré cómo funciona el código del juego "Rock, Paper
    Se define una función "crear_enemigo()" que crea un objeto "papel" y lo agrega a la lista de enemigos. Esta función se ejecuta cada 3.3 segundos mediante el uso de la función "pilas.tareas.agregar()".
 
 10. Detectar colisiones con los enemigos "papel":
-    Se define una función "cuanto_toca_enemigo(rock
-
-, enemigo)" que se ejecuta cuando el personaje principal colisiona con un enemigo "papel". En esta función, se llama al método "perder()" del personaje principal para cambiar su estado y se elimina el enemigo.
+    Se define una función "cuanto_toca_enemigo(rock, enemigo)" que se ejecuta cuando el personaje principal colisiona con un enemigo "papel". En esta función, se llama al método "perder()" del personaje principal para cambiar su estado y se elimina el enemigo.
 
 11. Ejecutar el bucle principal del juego:
     Se llama al método "pilas.ejecutar()" para iniciar el bucle principal del juego y mantenerlo en funcionamiento.
