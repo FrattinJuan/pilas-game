@@ -1,7 +1,10 @@
+#Programado por Juan Frattin 14/06/2023
+#pilasengine 1.4.2 en python2
 # coding: utf-8
 import random
 import pilasengine
 
+# Definición de la clase Estado
 class Estado:
 
     def __init__(self, rock):
@@ -11,52 +14,53 @@ class Estado:
     def iniciar(self):
         pass
         
+# Definición de la clase Ingresando, que hereda de Estado
 class Ingresando(Estado):
 
     def iniciar(self):
-        self.rock.definir_animacion([3, 4])
+        self.rock.definir_animacion([3, 4])  # Define la animación del personaje
         self.contador = 0
         self.rock.x = -380
-        self.rock.x = [0], 0.5
+        self.rock.x = [0], 0.5  # Mueve el personaje hacia la posición inicial
         self.rock.y = -150
 
     def actualizar(self):
         self.contador += 1
 
         if self.contador > 50:
-            self.rock.estado = Moviendo(self.rock)
+            self.rock.estado = Moviendo(self.rock)  # Cambia al estado de Moviendo
             
-            
+# Definición de la clase Moviendo, que hereda de Estado
 class Moviendo(Estado):
 
     def actualizar(self):
         velocidad = 5
 
-        if pilas.escena.control.derecha:
-            self.rock.x += velocidad
-        elif pilas.escena.control.izquierda:
-            self.rock.x -= velocidad
+        if pilas.escena.control.derecha:  # Verifica si se presionó la tecla derecha
+            self.rock.x += velocidad  # Mueve el personaje hacia la derecha
+        elif pilas.escena.control.izquierda:  # Verifica si se presionó la tecla izquierda
+            self.rock.x -= velocidad  # Mueve el personaje hacia la izquierda
 
         if self.rock.x > 210:
-            self.rock.x = 210
+            self.rock.x = 210  # Limita el movimiento del personaje a la derecha
         elif self.rock.x < -210:
-            self.rock.x = -210
+            self.rock.x = -210  # Limita el movimiento del personaje a la izquierda
             
-            
+# Definición de la clase Perdiendo, que hereda de Estado
 class Perdiendo(Estado):
 
     def iniciar(self):
-        self.rock.centro = ('centro', 'centro')
+        self.rock.centro = ('centro', 'centro')  # Define el centro del personaje
         self.velocidad = -2
 
     def actualizar(self):
-        self.rock.rotacion += 7
-        self.rock.escala -= 0.001
-        self.rock.x -= self.velocidad
-        self.velocidad += 0.2
-        self.rock.y -= 1
-        
-        
+        self.rock.rotacion += 7  # Rota el personaje
+        self.rock.escala -= 0.001  # Reduce la escala del personaje
+        self.rock.x -= self.velocidad  # Mueve el personaje horizontalmente
+        self.velocidad += 0.2  # Incrementa la velocidad de movimiento
+        self.rock.y -= 1  # Mueve el personaje hacia abajo
+
+# Definición de la clase Rock, que hereda de pilasengine.actores.Actor
 class Rock(pilasengine.actores.Actor):
 
     def iniciar(self):        
@@ -66,7 +70,6 @@ class Rock(pilasengine.actores.Actor):
         self.escala = 0.04
         self.estado = Ingresando(self)
         self.contador = 0
-        
         
     def definir_animacion(self, cuadros):
         self.paso = 0
@@ -86,15 +89,14 @@ class Rock(pilasengine.actores.Actor):
             if self.paso >= len(self.cuadros):
                 self.paso = 0
 
-        
     def perder(self):
-        self.estado = Perdiendo(self)
+        self.estado = Perdiendo(self)  # Cambia al estado de Perdiendo
         t = pilas.actores.Texto("Perdiste ! ")
         t.color = 'negro'
         t.escala = 0
         t.escala = [1], 0.5
         
-        
+# Definición de la clase Papel, que hereda de pilasengine.actores.Actor
 class Papel(pilasengine.actores.Actor):
     def iniciar(self):
         self.imagen = 'papel.png'
@@ -108,7 +110,7 @@ class Papel(pilasengine.actores.Actor):
         if self.abajo < -320:
             self.eliminar()                    
 
-
+# Definición de la clase Tijera, que hereda de pilasengine.actores.Actor
 class Tijera(pilasengine.actores.Actor):
     def iniciar(self):
         self.imagen = 'tijera.png'
